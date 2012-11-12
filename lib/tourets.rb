@@ -1,3 +1,4 @@
+require 'ruby-rets'
 require 'tourets/rails'
 require 'tourets/utilities'
 require 'tourets/exceptions'
