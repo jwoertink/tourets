@@ -4,6 +4,16 @@ module TouRETS
     # This class searches for ResidentialProperty, Condo, SingleFamily, Rental
     # Some MLS use "1", some use :RES... Will need to decide which way is to be used.
     
+    # these will be needed for defaults
+    #("242" => "ER,EA,C", "1809" => "Y", "130" => "Y") 
+    # This is Active Properties & Contingent
+    # "242" => "ER,EA,C"
+
+    # This is IDX Display
+    # "1809" => "Y"
+
+    # This is Internet Display
+    # '130' => "Y"
     class << self
       include Utilities
       # Returns an array of property results. 
