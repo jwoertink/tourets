@@ -3,8 +3,8 @@ require File.expand_path('../lib/tourets/rails/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Jeremy Woertink", "Justin Mitchell"]
-  gem.email         = ["jeremywoertink@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
+  gem.email         = ["jeremywoertink@gmail.com", "jmitchell4140@gmail.com"]
+  gem.description   = %q{TouRETS is a rails gem used to interface with multiple RETS using the ruby-rets gem}
   gem.summary       = %q{TODO: Write a gem summary}
   gem.homepage      = ""
 

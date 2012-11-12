@@ -8,6 +8,18 @@ Add this line to your application's Gemfile:
 
     gem 'tourets'
 
+Add a rets_config.yml to your config directory
+
+	-
+	  mls: 'GLVAR'
+	  url: 'http://las.rets.interealty.com/Login.asmx/Login'
+	  username: 'user'
+	  password: 'secret'
+	  rets_version: '1.8'
+	  auth_mode: :digest
+	  useragent:
+	    name: 'some_user_connector'
+
 And then execute:
 
     $ bundle
@@ -17,8 +29,15 @@ Or install it yourself as:
     $ gem install tourets
 
 ## Usage
+(since this is still new, this usage may change often)
 
-TODO: Write usage instructions here
+```ruby
+TouRETS.establish_connection('GLVAR')
+@properties = TouRETS::Property.where(:bedrooms => 3, :bathrooms => 2)
+TouRETS.close_connection
+```
+
+
 
 ## Contributing
 
