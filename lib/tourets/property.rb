@@ -1,12 +1,11 @@
 module TouRETS
   class Property
-    include Utilities
+    
     # This class searches for ResidentialProperty, Condo, SingleFamily, Rental
     # Some MLS use "1", some use :RES... Will need to decide which way is to be used.
     
-    
     class << self
-      
+      include Utilities
       # Returns an array of property results. 
       def where(search_params = {})
         TouRETS.ensure_connected!
