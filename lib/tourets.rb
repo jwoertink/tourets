@@ -1,9 +1,9 @@
-require "tourets/rails"
-require 'tourest/utilities'
-require "tourets/exceptions"
-require "tourets/extensions/hash" # This should go away after Rails 4.0
+require 'tourets/rails'
+require 'tourets/utilities'
+require 'tourets/exceptions'
+require 'tourets/extensions/hash' # This should go away after Rails 4.0
 require 'tourets/search'
-require "tourets/property"
+require 'tourets/property'
 
 module TouRETS
   include Utilities
@@ -33,7 +33,7 @@ module TouRETS
     
     # Closes the current connection to the RETS server
     def close_connection
-      current_connection.logout
+      current_connection.logout if current_connection?
     end
     
     def ensure_connected!
@@ -41,13 +41,13 @@ module TouRETS
     end
     
     def current_connection?
-      !current_connect.nil?
+      !current_connection.nil?
     end
     
     # The root of the application using this gem
     def app_root
       if defined?(Rails)
-        Rails.root
+        ::Rails.root
       else
         Dir.pwd
       end

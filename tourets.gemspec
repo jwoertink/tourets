@@ -4,8 +4,8 @@ require File.expand_path('../lib/tourets/rails/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Jeremy Woertink", "Justin Mitchell"]
   gem.email         = ["jeremywoertink@gmail.com", "jmitchell4140@gmail.com"]
-  gem.description   = %q{TouRETS is a rails gem used to interface with multiple RETS using the ruby-rets gem}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = "TouRETS is a rails gem used to interface with multiple RETS using the ruby-rets gem"
+  gem.summary       = "Use RETS with a LOT less hassle"
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
@@ -16,5 +16,7 @@ Gem::Specification.new do |gem|
   gem.version       = TouRETS::Rails::VERSION
   
   gem.add_dependency('ruby-rets')
+  gem.add_dependency('railties', '>= 3.1')
   gem.add_development_dependency('rspec')
+  gem.add_development_dependency('rails', '>= 3.1')
 end

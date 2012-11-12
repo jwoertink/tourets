@@ -8,7 +8,7 @@ module TouRETS
       
       # Returns an array of property results. 
       def where(search_params = {})
-        ensure_connected!
+        TouRETS.ensure_connected!
         [].tap do |properties|
           search_params = map_search_params(search_params)
           Search.find(:search_type => :Property, :class => "1", :query => hash_to_rets_query_string(search_params)) do |property|

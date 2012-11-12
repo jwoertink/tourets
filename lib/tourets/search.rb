@@ -6,7 +6,11 @@ module TouRETS
       
       def find(search_params = {}, &block)
         raise ArgumentError, "No block passed" unless block_given?
-        current_connection.search(search_params, &block)
+        begin
+          TouRETS.current_connection.search(search_params, &block)
+        rescue "You must establish a connection first."
+          
+        end
       end
       
     end
