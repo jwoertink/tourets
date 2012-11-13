@@ -29,7 +29,11 @@ module TouRETS
     
     def method_missing(method_name, *args, &block)
       val = attributes[key_map[method_name.to_sym]]
-      super if val.nil?
+      if val.nil?
+        super
+      else
+        return val
+      end
     end
     
   end
