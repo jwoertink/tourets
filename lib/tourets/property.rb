@@ -29,7 +29,7 @@ module TouRETS
     
     # Return an array of the photo objects that belong to a particular property
     def photos
-      []
+      @photos ||= grab_photos
     end
     
     def method_missing(method_name, *args, &block)
@@ -37,9 +37,18 @@ module TouRETS
       if val.nil?
         super
       else
+        # TODO: figure out why this always returns nil
         return val
       end
     end
+    
+    private
+    
+      def grab_photos
+        [].tap do |pics|
+          pics << TouRETS::Photo.find(attributes['sysid'], :resource => :Property)
+        end.flatten
+      end
     
   end
 end
