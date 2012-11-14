@@ -27,6 +27,11 @@ module TouRETS
       self.attributes = args
     end
     
+    # Return an array of the photo objects that belong to a particular property
+    def photos
+      []
+    end
+    
     def method_missing(method_name, *args, &block)
       val = attributes[key_map[method_name.to_sym]]
       if val.nil?

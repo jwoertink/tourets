@@ -39,7 +39,7 @@ module TouRETS
         :dryer_hookup => "34",        #String
         :area => "37",                #String
         :association_fee => "39",     #Integer
-        #1st Encumbr Assumption Desc => "43" # No clue what this is...
+        #1st Encumbr Assumption Desc => "43" # Like the mortgage...
         :three_quarter_baths => "60", #Integer
         :bathrooms => "61",           #Integer
         :half_baths => "62",          #Integer
