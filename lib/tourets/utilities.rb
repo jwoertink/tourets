@@ -15,7 +15,7 @@ module TouRETS
     # This takes a hash of search parameters, and modifies 
     # the hash to have the correct key types for the current RETS server
     def map_search_params(search_params)
-      @new_hash ||= Hash[search_params.map {|k, v| [key_map[k], v] }]
+      Hash[search_params.map {|k, v| [key_map[k], v] }]
     end
     
     # Giant Hash.
