@@ -6,6 +6,18 @@ module TouRETS
     def hash_to_rets_query_string(hash)
       [].tap do |str|
         hash.each_pair do |k,v|
+          case v.class
+          when Array
+            v = v.join(',')
+          when Range
+            v = "#{v.first}-#{v.last}"
+          when Hash
+            if v.has_key?(:or)
+              v = "|#{v[:or].join(',')}"
+            elsif v.has_key?(:not)
+              v = "~#{v[:not].join(',')}"
+            end
+          end
           str << "(#{k.to_s.camelize}=#{v})"
         end
       end.join(',')
@@ -25,6 +37,7 @@ module TouRETS
     # We could figure out a way to convert to Integer, or DateTime objects, etc... depending.
     def key_map
       {
+        :id => "sysid",         #String
         :property_type => "1",  #String
         :acreage => "2",        #Float
         :zip_code => "10",      #String
