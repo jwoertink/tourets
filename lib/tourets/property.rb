@@ -4,8 +4,6 @@ module TouRETS
     extend Utilities
     
     SEARCH_DEFAULTS = {:active_properties => "ER,EA,C", :idx_display => "Y", :internet_display => "Y"}
-    @@results = []
-    @@query = {}
     
     # This class searches for ResidentialProperty, Condo, SingleFamily, Rental
     # Some MLS use "1", some use :RES... Will need to decide which way is to be used.
@@ -37,24 +35,24 @@ module TouRETS
         end
       end
       
-      # Propert.where(:bedrooms => 3).limit(10) #not implemented
-      def limit(limit_number = 5000)
-        {:limit => limit_number}
-        self
-      end
-      
-      # Property.where(:bedrooms => 3).count #not implemented
-      def count
-        {:count_mode => :only}
-        self
-      end
-      
-      # Property.select(['SystemName', 'LongName']).where(:bedrooms => 3) #not implemented
-      # select is to limit which fields actually get returned. This could help with mapping
-      def select(fields=[])
-        {:select => fields}
-        self
-      end
+      # # Propert.where(:bedrooms => 3).limit(10) #not implemented
+      # def limit(limit_number = 5000)
+      #   {:limit => limit_number}
+      #   self
+      # end
+      # 
+      # # Property.where(:bedrooms => 3).count #not implemented
+      # def count
+      #   {:count_mode => :only}
+      #   self
+      # end
+      # 
+      # # Property.select(['SystemName', 'LongName']).where(:bedrooms => 3) #not implemented
+      # # select is to limit which fields actually get returned. This could help with mapping
+      # def select(fields=[])
+      #   {:select => fields}
+      #   self
+      # end
       
     end
     
@@ -74,7 +72,6 @@ module TouRETS
       if val.nil?
         super
       else
-        # TODO: figure out why this always returns nil
         return val
       end
     end
