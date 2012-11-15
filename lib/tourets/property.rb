@@ -11,15 +11,15 @@ module TouRETS
       
       # Returns an array of all of the properties
       # Property.all
-      def all
-        TouRETS.ensure_connected!
-        [].tap do |properties|
-          search_params = map_search_params(SEARCH_DEFAULTS)
-          Search.find(:search_type => :Property, :class => "1", :query => hash_to_rets_query_string(search_params)) do |property|
-            properties << self.new(property)
-          end
-        end
-      end
+      # def all
+      #   TouRETS.ensure_connected!
+      #   [].tap do |properties|
+      #     search_params = map_search_params(SEARCH_DEFAULTS)
+      #     Search.find(:search_type => :Property, :class => "1", :query => hash_to_rets_query_string(search_params)) do |property|
+      #       properties << self.new(property)
+      #     end
+      #   end
+      # end
       
       # Returns an array of property results.
       # Property.where(:bedrooms => 7, :bathrooms => 4, :list_price => 200000..300000)

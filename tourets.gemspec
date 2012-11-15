@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = TouRETS::Rails::VERSION
   
-  gem.add_dependency('ruby-rets')
+  gem.add_dependency('ruby-rets', '2.0.5')
   gem.add_dependency('railties', '>= 3.1')
   gem.add_development_dependency('rspec')
   gem.add_development_dependency('rails', '>= 3.1')
