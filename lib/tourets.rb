@@ -36,6 +36,7 @@ module TouRETS
     # Closes the current connection to the RETS server
     def close_connection
       current_connection.logout if current_connection?
+      current_connection = nil
     end
     
     def ensure_connected!

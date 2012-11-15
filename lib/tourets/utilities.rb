@@ -6,7 +6,8 @@ module TouRETS
     def hash_to_rets_query_string(hash)
       [].tap do |str|
         hash.each_pair do |k,v|
-          str << "(#{k}=#{v})"
+          val = value_map(v)
+          str << "(#{k}=#{val})"
         end
       end.join(',')
     end
@@ -102,6 +103,8 @@ module TouRETS
         :year_round_school => "216",  #String
         :buyer_agentcode => "218",    #String
         :sewer => "219",              #String
+        # #Loft => "231",             #Integer
+        :has_spa => "236",            #Boolean
         :active_properties => "242",
         :idx_display => "1809",
         :sqft => "2361"
@@ -109,19 +112,26 @@ module TouRETS
     end
     
     # Take values like true and false, convert them to "Y" or "N". make collections into joint strings.
-    def value_map
-      # case v.class
-      # when Array
-      #   v = v.join(',')
-      # when Range
-      #   v = "#{v.first}-#{v.last}"
-      # when Hash
-      #   if v.has_key?(:or)
-      #     v = "|#{v[:or].join(',')}"
-      #   elsif v.has_key?(:not)
-      #     v = "~#{v[:not].join(',')}"
-      #   end
-      # end
+    def value_map(value)
+      v = case value.class
+      when Array
+        value.join(',')
+      when Range
+        "#{value.first}-#{value.last}"
+      when Hash
+        if value.has_key?(:or)
+          "|#{value[:or].join(',')}"
+        elsif value.has_key?(:not)
+          "~#{value[:not].join(',')}"
+        end
+      when TrueClass
+        "Y" # TODO: figure out if this should be Y or Yes
+      when FalseClass
+        "N" # TODO: figure out if this should be N or No
+      else
+        value
+      end
+      v
     end
     
   end
