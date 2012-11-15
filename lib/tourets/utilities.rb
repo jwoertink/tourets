@@ -7,7 +7,7 @@ module TouRETS
       [].tap do |str|
         hash.each_pair do |k,v|
           val = value_map(v)
-          str << "(#{k}=#{val})"
+          str << "(#{k.to_s.camelize}=#{val})"
         end
       end.join(',')
     end
