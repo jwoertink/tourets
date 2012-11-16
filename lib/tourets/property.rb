@@ -3,23 +3,18 @@ module TouRETS
     include Utilities
     extend Utilities
     
-    SEARCH_DEFAULTS = {:active_properties => "ER,EA,C", :idx_display => "Y", :internet_display => "Y"}
-    
+    SEARCH_QUERY_DEFAULTS = {:active_properties => "ER,EA,C", :idx_display => "Y", :internet_display => "Y"}
     # This class searches for ResidentialProperty, Condo, SingleFamily, Rental
     # Some MLS use "1", some use :RES... Will need to decide which way is to be used.
+    SEARCH_CONFIG_DEFAULTS = {:search_type => :Property, :class => "1"}
+    
     class << self
       
       # Returns an array of all of the properties
       # Property.all
-      # def all
-      #   TouRETS.ensure_connected!
-      #   [].tap do |properties|
-      #     search_params = map_search_params(SEARCH_DEFAULTS)
-      #     Search.find(:search_type => :Property, :class => "1", :query => hash_to_rets_query_string(search_params)) do |property|
-      #       properties << self.new(property)
-      #     end
-      #   end
-      # end
+      def all
+        where
+      end
       
       # Returns an array of property results.
       # Property.where(:bedrooms => 7, :bathrooms => 4, :list_price => 200000..300000)
@@ -28,8 +23,9 @@ module TouRETS
       def where(search_params = {})
         TouRETS.ensure_connected!
         [].tap do |properties|
-          search_params = map_search_params(SEARCH_DEFAULTS.merge(search_params))
-          Search.find(:search_type => :Property, :class => "1", :query => hash_to_rets_query_string(search_params)) do |property|
+          search_params = map_search_params(SEARCH_QUERY_DEFAULTS.merge(search_params))
+          search_config = SEARCH_CONFIG_DEFAULTS.merge({:query => hash_to_rets_query_string(search_params)})
+          Search.find(search_config) do |property|
             properties << self.new(property)
           end
         end
@@ -37,13 +33,13 @@ module TouRETS
       
       # # Propert.where(:bedrooms => 3).limit(10) #not implemented
       # def limit(limit_number = 5000)
-      #   {:limit => limit_number}
+      #   SEARCH_CONFIG_DEFAULTS.merge!(:limit => limit_number)
       #   self
       # end
       # 
       # # Property.where(:bedrooms => 3).count #not implemented
       # def count
-      #   {:count_mode => :only}
+      #   SEARCH_CONFIG_DEFAULTS.merge!(:count_mode => :only)
       #   self
       # end
       # 
