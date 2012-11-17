@@ -3,20 +3,21 @@ module TouRETS
     include Utilities
     extend Utilities
     
-    SEARCH_QUERY_DEFAULTS = {:active_properties => "ER,EA,C", :idx_display => "Y", :internet_display => "Y"}
+    SEARCH_QUERY_DEFAULTS = {:listing_status => "ER,EA,C", :idx_display => "Y", :internet_display => "Y"}
     # This class searches for ResidentialProperty, Condo, SingleFamily, Rental
     # Some MLS use "1", some use :RES... Will need to decide which way is to be used.
     SEARCH_CONFIG_DEFAULTS = {:search_type => :Property, :class => "1"}
     
     class << self
       
-      # Returns an array of all of the properties
+      # Returns an array of all of the properties. Same as calling where() with no options
+      # TODO: figure out why it limits to 5,000 records.
       # Property.all
       def all
         where
       end
       
-      # Returns an array of property results.
+      # Returns an array of property results. A Property is defined as ["Single Family Residential", "Manufactured Home", "Condominium", "Townhouse"]
       # Property.where(:bedrooms => 7, :bathrooms => 4, :list_price => 200000..300000)
       # Property.where(:property_type => {:not => ['CONDO', 'TOWNHOME']}, :area => {:or => ['South West', 'North West']})
       # Property.where(:area => ['South West', 'North West']) # This is like 'AND'
@@ -33,13 +34,13 @@ module TouRETS
       
       # # Propert.where(:bedrooms => 3).limit(10) #not implemented
       # def limit(limit_number = 5000)
-      #   SEARCH_CONFIG_DEFAULTS.merge!(:limit => limit_number)
+      #   {:limit => limit_number}
       #   self
       # end
       # 
       # # Property.where(:bedrooms => 3).count #not implemented
       # def count
-      #   SEARCH_CONFIG_DEFAULTS.merge!(:count_mode => :only)
+      #   {:count_mode => :only}
       #   self
       # end
       # 
@@ -63,12 +64,13 @@ module TouRETS
       @photos ||= grab_photos
     end
     
+    # Look for one of the mapped keys, and return the value or throw method missing error.
     def method_missing(method_name, *args, &block)
-      val = attributes[key_map[method_name.to_sym]]
-      if val.nil?
-        super
+      mapped_key = key_map[method_name.to_sym]
+      if attributes.has_key?(mapped_key)
+        attributes[mapped_key]
       else
-        return val
+        super
       end
     end
     

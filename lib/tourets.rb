@@ -17,6 +17,7 @@ module TouRETS
     # There must be a rets_config.yml file in the :rails_root/config directory
     # 
     def establish_connection(mls) 
+      close_connection if current_connection?
       config_file = File.join(app_root, 'config', 'rets_config.yml')
       if File.exists?(config_file)
         connections = YAML.load_file(config_file)
