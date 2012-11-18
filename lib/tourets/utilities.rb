@@ -103,7 +103,7 @@ module TouRETS
         :year_round_school => "216",  #String
         :buyer_agentcode => "218",    #String
         :sewer => "219",              #String
-        # #Loft => "231",             #Integer
+        :loft_number => "231",        #Integer
         :has_spa => "236",            #Boolean
         :living_area_size => "237",   #Integer
         :listing_status => "242",     #String
