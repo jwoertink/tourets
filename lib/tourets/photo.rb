@@ -8,6 +8,7 @@ module TouRETS
       # Default it to return all of the photos.
       def find(sysid, opts={})
         limit = opts[:id] || "*"
+        resource = opts[:resource] || :Property
         [].tap do |photos|
           TouRETS.current_connection.get_object(:resource => opts[:resource], :type => :Photo, :location => false, :id => "#{sysid}:#{limit}") do |headers, content|
             photos << new(headers, content)
