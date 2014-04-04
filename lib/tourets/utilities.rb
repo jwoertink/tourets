@@ -1,6 +1,16 @@
 module TouRETS
   module Utilities
-    
+
+    def self.included(base)
+      base.send :extend, self
+    end
+
+    # Loads a YAML file by the `filepath`
+    def load_yml(filepath)
+      raise ConfigurationError, "Couldn't find File in #{filepath}." unless File.exists?(config_file)
+      @yml ||= YAML.load_file(config_file)
+    end
+
     # Convert a key value pair into a RETS formatted query string.
     # TODO: Take values that are arrays, ranges, or hashes, and convert those properly
     def hash_to_rets_query_string(hash)
@@ -11,18 +21,18 @@ module TouRETS
         end
       end.join(',')
     end
-    
-    # This takes a hash of search parameters, and modifies 
+
+    # This takes a hash of search parameters, and modifies
     # the hash to have the correct key types for the current RETS server
     def map_search_params(search_params)
       Hash[search_params.map {|k, v| [key_map[k], v] }]
     end
-    
+
     # Giant Hash.
     # TODO: OPTIMIZE!!!! ZOMG! O_o
     # Maybe break this into a YAML file that will pick which keymap to use based on the current_connection?
     # I'm thinking maybe like a dictionary lookup. Figure out what each RETS server uses.
-    # Also good to note that there are different data types, but they all are strings. 
+    # Also good to note that there are different data types, but they all are strings.
     # We could figure out a way to convert to Integer, or DateTime objects, etc... depending.
     # All results are esentially just strings. The comments below indicate what the value type should be by how it's formatted
     def key_map
@@ -142,13 +152,13 @@ module TouRETS
         :fence_type => "295",               #String
         :equestrian_desc => "296",          #String
         :direction_house_faces => "297",    #String
-        :misc_desc => "298",                #String       
-        :exterior_desc => "299",            #String       
-        :landscape_desc => "300",           #String       
-        :heating_desc => "301",             #String       
-        :heating_fuel_desc => "302",        #String       
-        :cooling_system => "303",           #String       
-        :utility_info => "304",             #String       
+        :misc_desc => "298",                #String
+        :exterior_desc => "299",            #String
+        :landscape_desc => "300",           #String
+        :heating_desc => "301",             #String
+        :heating_fuel_desc => "302",        #String
+        :cooling_system => "303",           #String
+        :utility_info => "304",             #String
         :energy_desc => "305",              #String
         :estimated_closing_date => "1736",  #DateTime
         :original_price_sqft => "1740",     #Integer
@@ -188,7 +198,7 @@ module TouRETS
         :auction_type => "2879"             #String
       }
     end
-    
+
     # Take values like true and false, convert them to "Y" or "N". make collections into joint strings.
     def value_map(value)
       v = case value.class
@@ -211,6 +221,6 @@ module TouRETS
       end
       v
     end
-    
+
   end
 end

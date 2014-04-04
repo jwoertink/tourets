@@ -8,7 +8,8 @@ RSpec.configure do |c|
   c.mock_with(:rspec)
   c.filter_run focus: true
   c.treat_symbols_as_metadata_keys_with_true_values = true
-  
+  c.run_all_when_everything_filtered = true
+
   # Be sure to add in the fixtures/config/rets_config.yml
   # This file should match the layout specified in the README
   def config_settings
