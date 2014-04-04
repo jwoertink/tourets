@@ -1,13 +1,13 @@
 # TouRETS
 
-The name came from a play on Tourette's and RETS. Because when you work with RETS you feel like you have Tourette's. 
+The name came from a play on Tourette's and RETS. Because when you work with RETS you feel like you have Tourette's.
 The goal of this gem is to make a really clean and familiar API for connecting to a RETS server. This gem was designed to be used with rails, so it takes a lot of the API that rails uses.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'tourets', :github => 'jwoertink/tourets'
+    gem 'tourets', github: 'jwoertink/tourets'
 
 Add a rets_config.yml to the config directory of your rails app
 
