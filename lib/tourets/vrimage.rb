@@ -1,13 +1,13 @@
-# NOTE: This class is not really implemented yet. 
+# NOTE: This class is not really implemented yet.
 
 module TouRETS
-  
+
   # VRImage is a multiple-view, possibly-interactive image related to the :resource
   class VRImage
-    
+
     class << self
-      
-      # Find the vrimage 
+
+      # Find the vrimage
       # Use find("1234", :id => 1) to find the photo with ID 1 in the 1234 group
       # Default it to return all of the photos.
       def find(sysid, opts={})
@@ -18,13 +18,12 @@ module TouRETS
           end
         end
       end
-      
+
     end
-    
-    
-    def initialize(headers, content)
-      
+
+
+    def initialize(*)
     end
-    
+
   end
 end
