@@ -5,9 +5,9 @@ module TouRETS
       base.send :extend, self
     end
 
-    # Loads a YAML file by the `filepath`
-    def load_yml(filepath)
-      raise ConfigurationError, "Couldn't find File in #{filepath}." unless File.exists?(config_file)
+    # Loads a YAML file by the `config_file`
+    def load_yml(config_file)
+      raise ConfigurationError, "Couldn't find config file in #{config_file}." unless File.exists?(config_file)
       @yml ||= YAML.load_file(config_file)
     end
 
