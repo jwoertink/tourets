@@ -38,7 +38,7 @@ module TouRETS
 
     # The root of the application using this gem
     def app_root
-      if defined?(Rails)
+      if defined?(::Rails)
         ::Rails.root
       else
         Dir.pwd
@@ -49,4 +49,4 @@ module TouRETS
 
 end
 
-require "tourets/engine"
+require "tourets/engine" if defined?(Rails)
