@@ -1,5 +1,4 @@
 require 'ruby-rets'
-require 'tourets/rails'
 require 'tourets/exceptions'
 require 'tourets/connection'
 require 'tourets/utilities'
@@ -49,3 +48,5 @@ module TouRETS
   end
 
 end
+
+require "tourets/engine"
