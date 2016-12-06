@@ -1,13 +1,13 @@
 module TouRETS
   class Connection
-    attr_accessor :settings
+    attr_accessor :settings, :client
   
     # mls : String, settings : Array(Hash(String, String | Symbol | Hash(String, String)))
     def initialize(mls, settings)
       config = settings.find { |conn| conn['mls'] == mls }
       raise TouRETS::ConfigurationError, "Missing or incorrect MLS key `#{mls}`." if config.nil?
       clean_setting_keys(config)
-      connect!
+      @client = connect!
     end
 
     private
